@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/shot_image"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:contentDescription="@string/shot_image"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/shot_placeholder" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_shot_detail_bar_height">
+
+            <TextView
+                android:id="@+id/shot_view_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:layout_toLeftOf="@+id/shot_like_count"
+                android:drawableLeft="@drawable/ic_visibility_gray_18dp"
+                android:drawablePadding="@dimen/spacing_xsmall"
+                tools:text="12" />
+
+            <TextView
+                android:id="@+id/shot_like_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:layout_toLeftOf="@+id/shot_bucket_count"
+                android:drawableLeft="@drawable/ic_favorite_gray_18dp"
+                android:drawablePadding="@dimen/spacing_xsmall"
+                tools:text="78" />
+
+            <TextView
+                android:id="@+id/shot_bucket_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/spacing_medium"
+                android:layout_toLeftOf="@+id/shot_comment_count"
+                android:drawableLeft="@drawable/ic_bucket_gray_18dp"
+                android:drawablePadding="@dimen/spacing_xsmall"
+                tools:text="78" />
+
+            <TextView
+                android:id="@+id/shot_comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/spacing_medium"
+                android:drawableLeft="@drawable/ic_comment_gray_18dp"
+                android:drawablePadding="@dimen/spacing_xsmall"
+                tools:text="76" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/shot_clickable_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+</android.support.v7.widget.CardView>
