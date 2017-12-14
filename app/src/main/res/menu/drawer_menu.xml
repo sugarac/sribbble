@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_item_home"
+            android:checked="true"
+            android:icon="@drawable/ic_home_black_18px"
+            android:title="@string/drawer_menu_home" />
+        <item
+            android:id="@+id/drawer_item_likes"
+            android:icon="@drawable/ic_favorite_black_18dp"
+            android:title="@string/drawer_menu_likes" />
+        <item
+            android:id="@+id/drawer_item_buckets"
+            android:icon="@drawable/ic_inbox_black_18dp"
+            android:title="@string/drawer_menu_buckets" />
+    </group>
+</menu>
