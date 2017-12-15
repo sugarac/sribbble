@@ -12,7 +12,7 @@
             android:title="@string/drawer_menu_likes" />
         <item
             android:id="@+id/drawer_item_buckets"
-            android:icon="@drawable/ic_inbox_black_18dp"
+            android:icon="@drawable/ic_bucket_gray_18dp"
             android:title="@string/drawer_menu_buckets" />
     </group>
 </menu>

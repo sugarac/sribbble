@@ -1,7 +1,9 @@
-package com.sugarac.sribbble;
+package com.sugarac.sribbble.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.sugarac.sribbble.R;
 
 public class MainActivity extends AppCompatActivity {
 
