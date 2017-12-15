@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment; //import android.app.Fragment;//can not 
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.sugarac.sribbble.R;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private ActionBarDrawerToggle drawerToggle; //used in 3 override methods and setDrawer()
 
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this); //ButterKnife standard usage
 
+        setSupportActionBar(toolbar); //change ActionBar to Toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //show back button
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -45,19 +49,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
+    protected void onPostCreate(Bundle savedInstanceState) { //ActionBarDrawerToggle
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) { //
+    public void onConfigurationChanged(Configuration newConfig) { //ActionBarDrawerToggle
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //
+    public boolean onOptionsItemSelected(MenuItem item) { //ActionBarDrawerToggle
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
