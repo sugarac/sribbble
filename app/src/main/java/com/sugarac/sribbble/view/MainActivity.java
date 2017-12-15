@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 drawerLayout.closeDrawers();
 
-                if (fragment != null) { //switch fragment
+                if (fragment != null) { //switch the fragment
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.fragment_container, fragment)
