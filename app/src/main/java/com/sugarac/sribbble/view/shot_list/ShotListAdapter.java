@@ -31,9 +31,10 @@ public class ShotListAdapter extends RecyclerView.Adapter {
         Shot shot = data.get(position);
 
         ShotViewHolder shotViewHolder = (ShotViewHolder) holder;
+        shotViewHolder.viewCount.setText(String.valueOf(shot.views_count));
         shotViewHolder.likeCount.setText(String.valueOf(shot.likes_count));
         shotViewHolder.bucketCount.setText(String.valueOf(shot.buckets_count));
-        shotViewHolder.viewCount.setText(String.valueOf(shot.views_count));
+        shotViewHolder.commentCount.setText(String.valueOf(shot.comments_count));
         shotViewHolder.image.setImageResource(R.drawable.shot_placeholder);
     }
 
