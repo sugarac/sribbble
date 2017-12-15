@@ -4,6 +4,7 @@ package com.sugarac.sribbble.view.shot_list;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,8 +44,8 @@ public class ShotListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new SpaceItemDecoration(
-                getResources().getDimensionPixelSize(R.dimen.spacing_medium)));
+//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+        recyclerView.addItemDecoration(new SpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_medium)));
 
         ShotListAdapter adapter = new ShotListAdapter(fakeData());
         recyclerView.setAdapter(adapter);
@@ -58,6 +59,7 @@ public class ShotListFragment extends Fragment {
             shot.views_count = random.nextInt(10000);
             shot.likes_count = random.nextInt(200);
             shot.buckets_count = random.nextInt(50);
+            shot.comments_count = random.nextInt(50);
             shotList.add(shot);
         }
         return shotList;
