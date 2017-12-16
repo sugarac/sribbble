@@ -27,7 +27,7 @@ public class Shot {
 
     public Date created_at;
 
-//    public User user;
+    public User user;
 
     public boolean liked;
     public boolean bucketed;

@@ -7,12 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.sugarac.sribbble.R;
 import com.sugarac.sribbble.model.Shot;
+import com.sugarac.sribbble.model.User;
 import com.sugarac.sribbble.view.base.SpaceItemDecoration;
 
 import java.util.ArrayList;
@@ -56,12 +58,31 @@ public class ShotListFragment extends Fragment {
         Random random = new Random();
         for (int i = 0; i < 20; ++i) {
             Shot shot = new Shot();
+            shot.title = "shot" + i;
             shot.views_count = random.nextInt(10000);
             shot.likes_count = random.nextInt(200);
             shot.buckets_count = random.nextInt(50);
             shot.comments_count = random.nextInt(50);
+            shot.description = makeDescription();
+
+            shot.user = new User();
+            shot.user.name = shot.title + " author";
+
             shotList.add(shot);
         }
         return shotList;
+    }
+
+    private static final String[] words = {
+            "bottle", "bowl", "brick", "building", "bunny", "cake", "car", "cat", "cup",
+            "desk", "dog", "duck", "elephant", "engineer", "fork", "glass", "griffon", "hat", "key",
+            "knife", "lawyer", "llama", "manual", "meat", "monitor", "mouse", "tangerine", "paper",
+            "pear", "pen", "pencil", "phone", "physicist", "planet", "potato", "road", "salad",
+            "shoe", "slipper", "soup", "spoon", "star", "steak", "table", "terminal", "treehouse",
+            "truck", "watermelon", "window"
+    };
+
+    private static String makeDescription() {
+        return TextUtils.join(" ", words);
     }
 }

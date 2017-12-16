@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/spacing_medium"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/shot_view_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/shot_action_drawable_top_icon_padding"
+            android:paddingBottom="@dimen/shot_action_drawable_top_icon_padding"
+            android:drawableTop="@drawable/ic_visibility_gray_18dp"
+            android:drawablePadding="@dimen/shot_action_drawable_top_icon_padding"
+            tools:text="1000" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/shot_action_like"
+                android:layout_width="@dimen/shot_action_icon_size"
+                android:layout_height="@dimen/shot_action_icon_size"
+                android:src="@drawable/ic_favorite_border_gray_18dp"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@string/like"/>
+
+            <TextView
+                android:id="@+id/shot_like_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                tools:text="1000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/shot_action_bucket"
+                android:layout_width="@dimen/shot_action_icon_size"
+                android:layout_height="@dimen/shot_action_icon_size"
+                android:src="@drawable/ic_bucket_gray_18dp"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@string/bucket"/>
+
+            <TextView
+                android:id="@+id/shot_bucket_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@android:color/holo_blue_dark"
+                android:clickable="true"
+                tools:text="1000" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/shot_action_share"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/shot_action_drawable_top_icon_padding"
+            android:paddingBottom="@dimen/shot_action_drawable_top_icon_padding"
+            android:drawableTop="@drawable/ic_share_gray_18dp"
+            android:drawablePadding="@dimen/shot_action_drawable_top_icon_padding"
+            android:background="?attr/selectableItemBackground"
+            android:text="@string/share" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large">
+
+        <ImageView
+            android:id="@+id/shot_author_picture"
+            android:layout_width="@dimen/shot_author_picture_size"
+            android:layout_height="@dimen/shot_author_picture_size"
+            android:layout_marginRight="@dimen/spacing_medium"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/user_picture_placeholder"
+            android:contentDescription="@string/shot_author_picture"/>
+
+        <TextView
+            android:id="@+id/shot_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/shot_author_picture"
+            android:layout_toRightOf="@id/shot_author_picture"
+            style="@style/AppTheme.TextView.2"
+            tools:text="Shot title" />
+
+        <TextView
+            android:id="@+id/shot_author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/shot_title"
+            android:layout_below="@id/shot_title"
+            tools:text="Shot author" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/shot_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        tools:text="Shot description\nShot description\nShot description\nShot description" />
+
+</LinearLayout>

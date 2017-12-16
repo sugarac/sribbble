@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size
+        android:width="@dimen/shot_author_picture_size"
+        android:height="@dimen/shot_author_picture_size"/>
+    <solid
+        android:color="@color/place_holder_bg"/>
+    <corners
+        android:radius="@dimen/shot_author_picture_radius"/>
+</shape>
