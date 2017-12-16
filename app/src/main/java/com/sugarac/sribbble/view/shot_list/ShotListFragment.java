@@ -2,6 +2,7 @@ package com.sugarac.sribbble.view.shot_list;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +12,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.sugarac.sribbble.R;
 import com.sugarac.sribbble.model.Shot;
@@ -28,6 +30,9 @@ public class ShotListFragment extends Fragment {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    private ShotListAdapter adapter;
+    private static final int COUNT_PER_PAGE = 20;
 
     public static ShotListFragment newInstance() {
         return new ShotListFragment();
@@ -49,14 +54,45 @@ public class ShotListFragment extends Fragment {
 //        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.addItemDecoration(new SpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.spacing_medium)));
 
-        ShotListAdapter adapter = new ShotListAdapter(fakeData());
+        final Handler handler = new Handler();
+        adapter = new ShotListAdapter(fakeData(0), new ShotListAdapter.LoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+//                Toast.makeText(getContext(), "load more called", Toast.LENGTH_LONG).show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+//                                    adapter.append(fakeData());
+                                    List<Shot> moreData = fakeData(adapter.getDataCount() / COUNT_PER_PAGE);
+                                    adapter.append(moreData);
+//                                    adapter.setShowLoading(moreData.size() >= COUNT_PER_PAGE);
+                                    if (moreData.size() < COUNT_PER_PAGE) {
+                                        adapter.setShowLoading(false);
+                                    }
+                                }
+                            });
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
-    private List<Shot> fakeData() {
+    private List<Shot> fakeData(int page) {
         List<Shot> shotList = new ArrayList<>();
         Random random = new Random();
-        for (int i = 0; i < 20; ++i) {
+
+        int count = page < 2 ? COUNT_PER_PAGE : 10;
+
+        for (int i = 0; i < count; ++i) {
             Shot shot = new Shot();
             shot.title = "shot" + i;
             shot.views_count = random.nextInt(10000);

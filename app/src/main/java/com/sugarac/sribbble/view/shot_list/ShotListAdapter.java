@@ -19,45 +19,89 @@ import com.sugarac.sribbble.view.shot_detail.ShotFragment;
 import java.util.List;
 
 public class ShotListAdapter extends RecyclerView.Adapter {
-    private List<Shot> data;
+    private static final int VIEW_TYPE_SHOT = 0;
+    private static final int VIEW_TYPE_LOADING = 1;
 
-    public ShotListAdapter(@NonNull List<Shot> data) {
+    private List<Shot> data;
+    private LoadMoreListener loadMoreListener;
+    private boolean showLoading;
+
+    public ShotListAdapter(@NonNull List<Shot> data, LoadMoreListener loadMoreListener) {
         this.data = data;
+        this.loadMoreListener = loadMoreListener;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_shot, parent, false);
-        return new ShotViewHolder(view);
+        if (viewType == VIEW_TYPE_SHOT) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.list_item_shot, parent, false);
+            return new ShotViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.list_item_loading, parent, false);
+            return new RecyclerView.ViewHolder(view) {
+            }; //anonymous class, no need to create ViewHolder for animation
+        }
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        final Shot shot = data.get(position); //final
+        if (holder instanceof ShotViewHolder) {
+            final Shot shot = data.get(position); //final
 
-        ShotViewHolder shotViewHolder = (ShotViewHolder) holder;
-        shotViewHolder.viewCount.setText(String.valueOf(shot.views_count));
-        shotViewHolder.likeCount.setText(String.valueOf(shot.likes_count));
-        shotViewHolder.bucketCount.setText(String.valueOf(shot.buckets_count));
-        shotViewHolder.commentCount.setText(String.valueOf(shot.comments_count));
-        shotViewHolder.image.setImageResource(R.drawable.shot_placeholder);
+            ShotViewHolder shotViewHolder = (ShotViewHolder) holder;
+            shotViewHolder.viewCount.setText(String.valueOf(shot.views_count));
+            shotViewHolder.likeCount.setText(String.valueOf(shot.likes_count));
+            shotViewHolder.bucketCount.setText(String.valueOf(shot.buckets_count));
+            shotViewHolder.commentCount.setText(String.valueOf(shot.comments_count));
+            shotViewHolder.image.setImageResource(R.drawable.shot_placeholder);
 
-        shotViewHolder.cover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { //display the shot after clicking
-                Context context = holder.itemView.getContext(); //final
-                Intent intent = new Intent(context, ShotActivity.class);
-                intent.putExtra(ShotFragment.KEY_SHOT,
-                        ModelUtils.toString(shot, new TypeToken<Shot>(){}));
-                intent.putExtra(ShotActivity.KEY_SHOT_TITLE, shot.title);
-                context.startActivity(intent);
-            }
-        });
+            shotViewHolder.cover.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) { //display the shot after clicking
+                    Context context = holder.itemView.getContext(); //final
+                    Intent intent = new Intent(context, ShotActivity.class);
+                    intent.putExtra(ShotFragment.KEY_SHOT,
+                            ModelUtils.toString(shot, new TypeToken<Shot>() {
+                            }));
+                    intent.putExtra(ShotActivity.KEY_SHOT_TITLE, shot.title);
+                    context.startActivity(intent);
+                }
+            });
+        } else {
+            loadMoreListener.onLoadMore();
+        }
     }
 
     @Override
     public int getItemCount() {
+//        return data.size() + 1; //show loading animation
+        return showLoading ? data.size() + 1 : data.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) { //necessary to override, for RV to get viewType
+        return position < data.size()
+                ? VIEW_TYPE_SHOT
+                : VIEW_TYPE_LOADING;
+    }
+
+    public interface LoadMoreListener {
+        void onLoadMore();
+    }
+
+    public void append(@NonNull List<Shot> moreShots) { //append more shots after onLoadMore
+        data.addAll(moreShots);
+        notifyDataSetChanged(); //redraw UI, e.g. 21 -> 40
+    }
+
+    public void setShowLoading(boolean showLoading) {
+        this.showLoading = showLoading;
+        notifyDataSetChanged();
+    }
+
+    public int getDataCount() {
         return data.size();
     }
 }
