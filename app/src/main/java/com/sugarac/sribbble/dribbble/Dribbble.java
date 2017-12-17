@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.sugarac.sribbble.model.Bucket;
 import com.sugarac.sribbble.model.Shot;
 import com.sugarac.sribbble.model.User;
 import com.sugarac.sribbble.utils.ModelUtils;
@@ -37,6 +38,7 @@ public class Dribbble {
 
     private static final TypeToken<List<Shot>> SHOT_LIST_TYPE = new TypeToken<List<Shot>>(){};
     private static final TypeToken<User> USER_TYPE = new TypeToken<User>(){};
+    private static final TypeToken<List<Bucket>> BUCKET_LIST_TYPE = new TypeToken<List<Bucket>>(){};
 
     private static OkHttpClient client = new OkHttpClient();
 
@@ -126,5 +128,10 @@ public class Dribbble {
     public static List<Shot> getShots(int page) throws IOException, JsonSyntaxException {
         String url = SHOTS_END_POINT + "?page=" + page;
         return parseResponse(makeGetRequest(url), SHOT_LIST_TYPE);
+    }
+
+    public static List<Bucket> getUserBuckets(int page) throws IOException, JsonSyntaxException {
+        String url = USER_END_POINT + "/" + "buckets?page=" + page;
+        return parseResponse(makeGetRequest(url), BUCKET_LIST_TYPE);
     }
 }
