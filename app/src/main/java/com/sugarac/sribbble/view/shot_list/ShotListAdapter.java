@@ -3,12 +3,15 @@ package com.sugarac.sribbble.view.shot_list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.google.gson.reflect.TypeToken;
 import com.sugarac.sribbble.R;
 import com.sugarac.sribbble.model.Shot;
@@ -56,6 +59,13 @@ public class ShotListAdapter extends RecyclerView.Adapter {
             shotViewHolder.bucketCount.setText(String.valueOf(shot.buckets_count));
             shotViewHolder.commentCount.setText(String.valueOf(shot.comments_count));
             shotViewHolder.image.setImageResource(R.drawable.shot_placeholder);
+
+            // play gif automatically
+            DraweeController controller = Fresco.newDraweeControllerBuilder()
+                    .setUri(Uri.parse(shot.getImageUrl()))
+                    .setAutoPlayAnimations(true)
+                    .build();
+            shotViewHolder.image.setController(controller);
 
             shotViewHolder.cover.setOnClickListener(new View.OnClickListener() {
                 @Override

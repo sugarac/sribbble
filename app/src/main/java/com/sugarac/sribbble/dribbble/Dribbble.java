@@ -24,7 +24,7 @@ import okhttp3.Response;
 public class Dribbble {
 
     private static final String TAG = "Dribbble API";
-
+    public static final int COUNT_PER_PAGE = 12;
     private static final String API_URL = "https://api.dribbble.com/v1/";
 
     private static final String SHOTS_END_POINT = API_URL + "shots";

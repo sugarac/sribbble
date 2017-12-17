@@ -4,12 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
-class ImageViewHolder extends RecyclerView.ViewHolder {
+import com.facebook.drawee.view.SimpleDraweeView;
 
-    ImageView image;
+class ImageViewHolder extends RecyclerView.ViewHolder {
+    SimpleDraweeView image;
 
     public ImageViewHolder(View itemView) {
         super(itemView);
-        image = (ImageView) itemView;
+        image = (SimpleDraweeView) itemView;
     }
 }
