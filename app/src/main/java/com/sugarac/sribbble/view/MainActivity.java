@@ -1,5 +1,6 @@
 package com.sugarac.sribbble.view;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,8 +10,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.sugarac.sribbble.R;
+import com.sugarac.sribbble.dribbble.Dribbble;
 import com.sugarac.sribbble.view.bucket_list.BucketListFragment;
 import com.sugarac.sribbble.view.shot_list.ShotListFragment;
 
@@ -78,6 +82,22 @@ public class MainActivity extends AppCompatActivity {
 
 //        drawerLayout.setDrawerListener(drawerToggle);
         drawerLayout.addDrawerListener(drawerToggle);
+
+        View headerView = navigationView.getHeaderView(0);
+        ((TextView) headerView.findViewById(R.id.nav_header_user_name)).setText(
+                Dribbble.getCurrentUser().name);
+
+        headerView.findViewById(R.id.nav_header_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dribbble.logout(MainActivity.this);
+
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

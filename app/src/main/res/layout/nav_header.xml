@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
-    android:orientation="vertical"
-    android:padding="@dimen/spacing_large"
-    android:background="@color/colorPrimary">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:paddingBottom="@dimen/spacing_medium"
+    android:paddingLeft="@dimen/spacing_medium"
+    android:paddingRight="@dimen/spacing_medium"
+    android:paddingTop="120dp">
+
+    <ImageView
+        android:id="@+id/nav_header_user_picture"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:contentDescription="@string/user_profile_picture"
+        tools:src="@drawable/user_picture_placeholder" />
 
     <TextView
-        android:id="@+id/nav_header_login_btn"
+        android:id="@+id/nav_header_user_name"
+        style="@style/AppTheme.TextView.2.White"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="@string/app_name"
-        style="@style/AppTheme.TextView.Clickable.2.White"/>
+        android:layout_alignTop="@id/nav_header_user_picture"
+        android:layout_toRightOf="@id/nav_header_user_picture"
+        tools:text="Username" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/nav_header_logout"
+        style="@style/AppTheme.TextView.Clickable.1.White"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nav_header_user_name"
+        android:layout_marginLeft="@dimen/nav_header_login_btn_margin_left"
+        android:layout_toRightOf="@id/nav_header_user_picture"
+        android:text="@string/logout" />
+
+</RelativeLayout>
